@@ -32,7 +32,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/OmS4GsE.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![alt text](http://i.imgur.com/OmS4GsE.gif)
 
 GIF created with [convertio](https://convertio.co/vn/mp4-gif/).
 
