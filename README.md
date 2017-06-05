@@ -32,7 +32,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-![alt text](http://i.imgur.com/OmS4GsE.gif)
+#[Screenshot](http://i.imgur.com/OmS4GsE.gif)
 
 GIF created with [convertio](https://convertio.co/vn/mp4-gif/).
 
