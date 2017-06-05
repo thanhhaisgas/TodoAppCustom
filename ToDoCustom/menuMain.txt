@@ -1,0 +1,136 @@
+package com.example.haint.todocustom;
+
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.SearchView;
+import android.widget.Toast;
+
+import com.example.haint.model.TaskModel;
+
+import java.util.ArrayList;
+
+
+public class HomeTask extends AppCompatActivity implements AddingNewAndEditTask.OnSelectedListener {
+
+    ArrayList<MenuItem> menuItemArrayList = new ArrayList<>();
+    ActionBar actionBar;
+
+    @Override
+    public void onSelected(TaskModel temp) {
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home_task);
+        actionBar = getSupportActionBar();
+        goFragmentListTask();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_action_bar, menu);
+
+        menuItemArrayList.add(menu.findItem(R.id.menuItemSave));
+        menuItemArrayList.add(menu.findItem(R.id.menuItemSearch));
+        menuItemArrayList.add(menu.findItem(R.id.menuItemAdd));
+        menuItemArrayList.add(menu.findItem(R.id.menuItemSorting));
+
+        menuItemArrayList.get(0).setVisible(false);
+
+        final MenuItem searchViewItem = menu.findItem(R.id.menuItemSearch);
+        SearchView searchView = (SearchView) searchViewItem.getActionView();
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setItemsVisibility(1, menuItemArrayList, false);
+            }
+        });
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                setItemsVisibility(1, menuItemArrayList, true);
+                return false;
+            }
+        });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return true;
+    }
+
+    private void setItemsVisibility(int pos, ArrayList<MenuItem> list, boolean visible) {
+        if(pos == 1){
+            for (int i=1; i<list.size(); i++) {
+                if(i!=pos){
+                    list.get(i).setVisible(visible);
+                }
+            }
+        }else {
+            if(pos == 2){
+                for (int i=0; i<list.size(); i++) {
+                    list.get(i).setVisible(visible);
+                }
+                list.get(0).setVisible(true);
+                actionBar.setDisplayHomeAsUpEnabled(true);
+
+            }
+            if(pos == 0){
+                for (int i=0; i<list.size(); i++) {
+                    list.get(i).setVisible(visible);
+                }
+                list.get(0).setVisible(false);
+                actionBar.setDisplayHomeAsUpEnabled(false);
+            }
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuItemSearch:
+                Toast.makeText(this,"sss", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menuItemAdd:
+                goFragmentAddEdit();
+                setItemsVisibility(2,menuItemArrayList,false);
+                return true;
+            case R.id.menuItemSave:
+                setItemsVisibility(0,menuItemArrayList,true);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void goFragmentAddEdit(){
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fmLinearlayout, new AddingNewAndEditTask());
+        transaction.commit();
+    }
+
+    private void goFragmentListTask(){
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.fmLinearlayout, new ListTask());
+        transaction.commit();
+    }
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menuItemSearch"
+        android:orderInCategory="100"
+        android:title="@null"
+        android:icon="@drawable/icon_search"
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menuItemSorting"
+        android:orderInCategory="100"
+        android:title="@null"
+        android:icon="@drawable/icon_sorting"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/menuSortName"
+                android:title="Sort by name" />
+            <item
+                android:id="@+id/menuSortStatus"
+                android:title="Sort by status" />
+            <item
+                android:id="@+id/menuSortDate"
+                android:title="Sort by date" />
+            <item
+                android:id="@+id/menuSortPLevel"
+                android:title="Sort by priority" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/menuItemAdd"
+        android:orderInCategory="100"
+        android:title="@null"
+        android:icon="@drawable/icon_add_list"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/menuItemSave"
+        android:orderInCategory="100"
+        android:title="@null"
+        android:icon="@drawable/icon_save"
+        app:showAsAction="always"/>
+
+</menu>
